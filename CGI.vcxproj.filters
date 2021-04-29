@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Entry">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="stbi">
+      <UniqueIdentifier>{fdb28637-7ebe-42fb-9e11-074009502f27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\OpenGL">
+      <UniqueIdentifier>{315f79c8-ff91-406e-be83-cf7e5ba08afd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Vulkan">
+      <UniqueIdentifier>{dfdf43fd-572e-4f26-a084-14550873d4f3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="framebufferobject.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="fullscreenquad.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="InputAttribute.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="model.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNode.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureCubeMap.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="stbi\stb_image_aug.c">
+      <Filter>stbi</Filter>
+    </ClCompile>
+    <ClCompile Include="CGI.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicPipeline.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="InputUniform.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderPipeline.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewportSetting.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="RasterizerSetting.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiSampleSetting.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTargetSetting.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="DepthStencilSetting.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanUtils.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderGraph.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="List.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferObject.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLUtils.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TextureCubeMap.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="wglew.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="framebufferobject.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="fullscreenquad.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ggl.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="glew.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="InputAttribute.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNode.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="stbi\stb_image_aug.h">
+      <Filter>stbi</Filter>
+    </ClInclude>
+    <ClInclude Include="CGI.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicPipeline.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="InputUniform.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderPipeline.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewportSetting.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="RasterizerSetting.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiSampleSetting.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderTargetSetting.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="DepthStencilSetting.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanUtils.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderGraph.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferObject.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLUtils.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
