@@ -36,7 +36,7 @@ namespace Alice {
 		AttributeDefine mAttributeDefines[8];
 		int mCurrentInputAttributeCount;
 		PrimitiveType mPrimitiveType;
-		std::unordered_map<int, AttributeBindingDescription*> mAttributeBindingDescription;
+		std::unordered_map<int, AttributeBindingDescription> mAttributeBindingDescription;
 		void SetPolygonMode(PrimitiveType type) {
 			mPrimitiveType = type;
 		}
@@ -52,35 +52,11 @@ namespace Alice {
 			mAttributeDefines[mCurrentInputAttributeCount++].mStartOffset = offset;
 			auto iter = mAttributeBindingDescription.find(input_stream_buffer_index);
 			if (iter == mAttributeBindingDescription.end()) {
-				AttributeBindingDescription* abd = new AttributeBindingDescription;
-				abd->mBindingPoint = input_stream_buffer_index;
-				abd->mStride = stride;
-				mAttributeBindingDescription.insert(std::pair<int, AttributeBindingDescription*>(input_stream_buffer_index, abd));
+				AttributeBindingDescription abd;
+				abd.mBindingPoint = input_stream_buffer_index;
+				abd.mStride = stride;
+				mAttributeBindingDescription.insert(std::pair<int, AttributeBindingDescription>(input_stream_buffer_index, abd));
 			}
 		}
-	};
-	class InputAttribute {
-	public:
-		InputAttribute();
-		ALICE_INPUT_ATTRIBUTE_COLLECTION mInputAttributesCollection;
-		BufferObject* mInputStreams[8];
-		AttributeDefine mAttributeDefines[8];
-		PrimitiveType mPrimitiveType;
-		int mCurrentInputAttributeCount;
-		void SetInputStream(int index, BufferObject* input_stream);
-		void SetPrimitiveType(PrimitiveType mode);
-		void Finish();
-	public:
-		template<int input_stream_buffer_index, int location, int component_count, int data_type, bool auto_normalize, int stride, int offset>
-		void AppendAttributeInput() {
-			mAttributeDefines[mCurrentInputAttributeCount].mInputStreamBufferIndex = input_stream_buffer_index;
-			mAttributeDefines[mCurrentInputAttributeCount].mLocation = location;
-			mAttributeDefines[mCurrentInputAttributeCount].mComponentCount = component_count;
-			mAttributeDefines[mCurrentInputAttributeCount].mDataType = data_type;
-			mAttributeDefines[mCurrentInputAttributeCount].mbAutoNormalization = auto_normalize;
-			mAttributeDefines[mCurrentInputAttributeCount].mStride = stride;
-			mAttributeDefines[mCurrentInputAttributeCount++].mStartOffset = offset;
-		}
-		
 	};
 }

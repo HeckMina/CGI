@@ -10,6 +10,7 @@ namespace Alice {
 		BlendFactor mBlendSrcFunc, mBlendDstFunc;
 		bool mbEnableBlend;
 		bool mbEnableDepthTest;
+		bool mbEnableDepthWrite;
 		bool mbEnableCullFace;
 		bool mbDirty;
 		ShaderPipeline mShaderPipeline;

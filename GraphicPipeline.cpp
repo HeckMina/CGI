@@ -26,8 +26,8 @@ namespace Alice {
 		int bindingDescriptionIndex = 0;
 		for (auto iter = inputAttributesDescription->mAttributeBindingDescription.begin(); iter != inputAttributesDescription->mAttributeBindingDescription.end(); ++iter) {
 			attribute_binding_descriptions[bindingDescriptionIndex].inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
-			attribute_binding_descriptions[bindingDescriptionIndex].binding = iter->second->mBindingPoint;
-			attribute_binding_descriptions[bindingDescriptionIndex++].stride = iter->second->mStride;
+			attribute_binding_descriptions[bindingDescriptionIndex].binding = iter->second.mBindingPoint;
+			attribute_binding_descriptions[bindingDescriptionIndex++].stride = iter->second.mStride;
 		}
 		return attribute_binding_descriptions;
 	}
@@ -80,7 +80,7 @@ namespace Alice {
 		mVertexInputBindingDescriptions = GenVertexInputBindingDescription(inputAttributesDescription);
 		mVertexInputAttributeDescriptions = GenVertexInputAttributeDescription(inputAttributesDescription);
 		VkPipelineVertexInputStateCreateInfo vertex_input_state_create_info = GenPipelineVertexInputStateCreateInfo(mVertexInputBindingDescriptions, mVertexInputAttributeDescriptions);
-		mPipelineShaderStageDescriptions = GenPipelineShaderStageCreateInfo(shaderPipeline);
+		std::vector<VkPipelineShaderStageCreateInfo> pipelineShaderStageDescriptions = GenPipelineShaderStageCreateInfo(shaderPipeline);
 		mPipelineLayout = GenGraphicPipeline(descriptorSetLayout);
 
 		VkDynamicState dynamic_state[] = { VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_LINE_WIDTH, VK_DYNAMIC_STATE_SCISSOR, VK_DYNAMIC_STATE_DEPTH_BIAS };
@@ -153,8 +153,8 @@ namespace Alice {
 
 		VkGraphicsPipelineCreateInfo ci = {};
 		ci.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
-		ci.stageCount = mPipelineShaderStageDescriptions.size();
-		ci.pStages = mPipelineShaderStageDescriptions.data();
+		ci.stageCount = pipelineShaderStageDescriptions.size();
+		ci.pStages = pipelineShaderStageDescriptions.data();
 		ci.pVertexInputState = &vertex_input_state_create_info;
 		ci.pInputAssemblyState = &inputAssemblyStateCreateInfo;
 		ci.pViewportState = &viewportStateCreateInfo;

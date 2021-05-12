@@ -21,7 +21,6 @@ namespace Alice {
 	};
 	class GraphicPipeline {
 	public:
-		std::vector<VkPipelineShaderStageCreateInfo> mPipelineShaderStageDescriptions;
 		std::vector<VkVertexInputBindingDescription> mVertexInputBindingDescriptions;
 		std::vector<VkVertexInputAttributeDescription> mVertexInputAttributeDescriptions;
 		ALICE_GRAPHIC_PIPELINE mGraphicPipeline;
