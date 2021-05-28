@@ -4,6 +4,7 @@
 #include "InputUniform.h"
 #include "shader.h"
 #include "utils.h"
+#include "Vulkan/VulkanBufferObject.h"
 namespace Alice {
 	SceneNode::SceneNode() :mGraphicPipeline(nullptr),mUniformInputLayoutInstance(nullptr) {
 
@@ -32,7 +33,7 @@ namespace Alice {
 		if (mGraphicPipeline == nullptr) {
 			mGraphicPipeline = new GraphicPipeline;
 			mGraphicPipeline->mGraphicPipelineSetting.mColorBlendSetting.AppendColorBlendSetting(true, 0, kBlendOperationAdd, kBlendOperationAdd, kBlendFactorSrcAlpha, kBlendFactorOneMinusSrcAlpha, kBlendFactorOneMinusSrcAlpha, kBlendFactorOneMinusSrcAlpha);
-			mGraphicPipeline->Compile(&mGeometry->mInputAttributeDescription,&mMaterial->mShaderPipeline,mUniformInputLayoutInstance->mUniformInputLayoutDescriptor->mDescriptorSetLayout);
+			mGraphicPipeline->Compile(mGeometry->mInputAttributeCollection,&mMaterial->mShaderPipeline,mUniformInputLayoutInstance->mUniformInputLayoutDescriptor->mDescriptorSetLayout);
 		}
 		//update self
 		mGeometry->Update(delta);
@@ -42,10 +43,10 @@ namespace Alice {
 	}
 	void SceneNode::Render() {
 		ALICE_BIND_GRAPHIC_PIPELINE(mGraphicPipeline->mGraphicPipeline);
-		ALICE_BIND_VERTEX_BUFFER(mGeometry->mVBO->mBuffer);
-		ALICE_BIND_INDEX_BUFFER(mGeometry->mIBO->mBuffer, VK_INDEX_TYPE_UINT32);
+		mGeometry->mInputAttributeCollection->Active();
+		mGeometry->mSubmeshes[0]->mIndexBuffer->Active();
 		ALICE_BIND_UNIFORM_INPUT(mGraphicPipeline->mPipelineLayout, mUniformInputLayoutInstance->mDescriptorSet);
-		ALICE_DRAW_PRIMITIVES_INDEXED(mGeometry->mIndexCount);
+		ALICE_DRAW_PRIMITIVES_INDEXED(mGeometry->mSubmeshes[0]->mValidIndexCount);
 		if (mNext != nullptr) {
 			Next<SceneNode>()->Render();
 		}

@@ -1,5 +1,7 @@
 #include "Geometry.h"
 #include "utils.h"
+#include "Vulkan/VulkanInputAttributeCollection.h"
+#include "Vulkan/VulkanBufferObject.h"
 namespace Alice {
 	Geometry::Geometry() {
 		mbDrawWidthIBO = false;
@@ -10,16 +12,18 @@ namespace Alice {
 	void Geometry::SetIndexCount(int index_count) {
 		mbDrawWidthIBO = true;
 		mIndexCount = index_count;
-		mIBO = new IndexBufferObject(BufferUsageHint::kBufferUsageHintStatic, sizeof(unsigned int) * index_count,sizeof(unsigned int));
+		mIBO = new VulkanIndexBufferObject(BufferUsageHint::kBufferUsageHintStatic, sizeof(unsigned int) * index_count,sizeof(unsigned int));
 	}
 	void Geometry::SetVertexCount(int vertex_count) {
 		mVertexCount = vertex_count;
-		mVBO = new VertexBufferObject(BufferUsageHint::kBufferUsageHintStatic, sizeof(Vertex) * vertex_count, sizeof(Vertex));
-		mInputAttributeDescription.SetPolygonMode(kPrimitiveTypeTriangles);
-		mInputAttributeDescription.AppendAttributeInput < 0, 0, 4, kBasicDataTypeFloat, false, sizeof(Vertex), 0>();
-		mInputAttributeDescription.AppendAttributeInput < 0, 1, 4, kBasicDataTypeFloat, false, sizeof(Vertex), sizeof(float) * 4>();
-		mInputAttributeDescription.AppendAttributeInput < 0, 2, 4, kBasicDataTypeFloat, false, sizeof(Vertex), sizeof(float) * 8>();
-		mInputAttributeDescription.AppendAttributeInput < 0, 3, 4, kBasicDataTypeFloat, false, sizeof(Vertex), sizeof(float) * 12>();
+		mVBO = new VulkanVertexBufferObject(BufferUsageHint::kBufferUsageHintStatic, sizeof(Vertex) * vertex_count, sizeof(Vertex));
+		mInputAttributeCollection = new VulkanInputAttributeCollection;
+		mInputAttributeCollection->SetPolygonMode(kPrimitiveTypeTriangles);
+		mInputAttributeCollection->AppendAttributeInput(0, 0, 4, kBasicDataTypeFloat, false, sizeof(Vertex), 0);
+		mInputAttributeCollection->AppendAttributeInput(0, 1, 4, kBasicDataTypeFloat, false, sizeof(Vertex), sizeof(float) * 4);
+		mInputAttributeCollection->AppendAttributeInput(0, 2, 4, kBasicDataTypeFloat, false, sizeof(Vertex), sizeof(float) * 8);
+		mInputAttributeCollection->AppendAttributeInput(0, 3, 4, kBasicDataTypeFloat, false, sizeof(Vertex), sizeof(float) * 12);
+		mInputAttributeCollection->SetVertexBuffer(0, mVBO);
 	}
 	void Geometry::SetIndex(int i, unsigned short index) {
 		mIBO->SetUInt32(i, index);
@@ -40,9 +44,8 @@ namespace Alice {
 		}
 	}
 	void Geometry::BeginDraw() {
-		ALICE_BIND_VERTEX_BUFFER(mVBO->mBuffer);
+		//ALICE_BIND_VERTEX_BUFFER(mVBO->mBuffer);
 		if (mbDrawWidthIBO) {
-			mIBO->Bind();
 		}
 	}
 	void Geometry::Draw() {

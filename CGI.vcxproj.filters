@@ -32,7 +32,7 @@
     <ClCompile Include="Geometry.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="InputAttribute.cpp">
+    <ClCompile Include="InputAttributeCollection.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
@@ -89,9 +89,6 @@
     <ClCompile Include="VulkanUtils.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="RenderGraph.cpp">
-      <Filter>Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="List.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
@@ -99,6 +96,24 @@
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="OpenGLUtils.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Vulkan\VulkanInputAttributeCollection.cpp">
+      <Filter>Renderer\Vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="Vulkan\VulkanBufferObject.cpp">
+      <Filter>Renderer\Vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexBuffer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="UniformBuffer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderPass.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
@@ -127,7 +142,7 @@
     <ClInclude Include="glew.h">
       <Filter>Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="InputAttribute.h">
+    <ClInclude Include="InputAttributeCollection.h">
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
@@ -178,9 +193,6 @@
     <ClInclude Include="VulkanUtils.h">
       <Filter>Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="RenderGraph.h">
-      <Filter>Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="List.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -188,6 +200,27 @@
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="OpenGLUtils.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Vulkan\VulkanBufferObject.h">
+      <Filter>Renderer\Vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="Vulkan\VulkanInputAttributeCollection.h">
+      <Filter>Renderer\Vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="AliceRenderLayer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformBuffer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderPass.h">
       <Filter>Renderer</Filter>
     </ClInclude>
   </ItemGroup>

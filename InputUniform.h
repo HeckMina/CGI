@@ -31,25 +31,6 @@ namespace Alice {
 		void AddUniformInput(int bindingPoint,int shader_stage,UniformType type);
 		const char* GetName();
 	};
-	class UniformBufferObject : public BufferObject {
-	public:
-		int mBindingPoint;
-		int mUniformDescriptorSetIndex;
-		UniformBufferObject(int size=16384) :
-			BufferObject(BufferObjectType::kBufferObjectTypeUniformBuffer, BufferUsageHint::kBufferUsageHintDynamic, size),
-			mBindingPoint(-1),
-			mUniformDescriptorSetIndex(-1){
-			mDataBuffer = new unsigned char[size];
-		}
-		void SetFloat(int offset_in_bytes, const float value);
-		void SetFloat2(int offset_in_bytes, const float* value);
-		void SetFloat2(int offset_in_bytes, const float x, const float y);
-		void SetFloat3(int offset_in_bytes, const float* value);
-		void SetFloat3(int offset_in_bytes, const float x, const float y, const float z);
-		void SetFloat4(int offset_in_bytes, const float* value);
-		void SetFloat4(int offset_in_bytes, const float x, const float y, const float z, const float w);
-		void SetMat4(int offset_in_bytes, const float* value);
-	};
 	class UniformInputLayoutDescriptor;
 	class UniformInputLayoutInstance {
 	public:

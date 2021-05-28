@@ -152,7 +152,8 @@
     <ClCompile Include="fullscreenquad.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="GraphicPipeline.cpp" />
-    <ClCompile Include="InputAttribute.cpp" />
+    <ClCompile Include="IndexBuffer.cpp" />
+    <ClCompile Include="InputAttributeCollection.cpp" />
     <ClCompile Include="InputUniform.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
@@ -161,7 +162,7 @@
     <ClCompile Include="MultiSampleSetting.cpp" />
     <ClCompile Include="OpenGLUtils.cpp" />
     <ClCompile Include="RasterizerSetting.cpp" />
-    <ClCompile Include="RenderGraph.cpp" />
+    <ClCompile Include="RenderPass.cpp" />
     <ClCompile Include="RenderTargetSetting.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="SceneNode.cpp" />
@@ -169,11 +170,16 @@
     <ClCompile Include="ShaderPipeline.cpp" />
     <ClCompile Include="stbi\stb_image_aug.c" />
     <ClCompile Include="TextureCubeMap.cpp" />
+    <ClCompile Include="UniformBuffer.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="ViewportSetting.cpp" />
     <ClCompile Include="VulkanUtils.cpp" />
+    <ClCompile Include="Vulkan\VulkanBufferObject.cpp" />
+    <ClCompile Include="Vulkan\VulkanInputAttributeCollection.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AliceRenderLayer.h" />
     <ClInclude Include="BufferObject.h" />
     <ClInclude Include="CGI.h" />
     <ClInclude Include="DepthStencilSetting.h" />
@@ -183,7 +189,8 @@
     <ClInclude Include="ggl.h" />
     <ClInclude Include="glew.h" />
     <ClInclude Include="GraphicPipeline.h" />
-    <ClInclude Include="InputAttribute.h" />
+    <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="InputAttributeCollection.h" />
     <ClInclude Include="InputUniform.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Material.h" />
@@ -191,7 +198,7 @@
     <ClInclude Include="MultiSampleSetting.h" />
     <ClInclude Include="OpenGLUtils.h" />
     <ClInclude Include="RasterizerSetting.h" />
-    <ClInclude Include="RenderGraph.h" />
+    <ClInclude Include="RenderPass.h" />
     <ClInclude Include="RenderTargetSetting.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="SceneNode.h" />
@@ -199,9 +206,13 @@
     <ClInclude Include="ShaderPipeline.h" />
     <ClInclude Include="stbi\stb_image_aug.h" />
     <ClInclude Include="TextureCubeMap.h" />
+    <ClInclude Include="UniformBuffer.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="ViewportSetting.h" />
     <ClInclude Include="VulkanUtils.h" />
+    <ClInclude Include="Vulkan\VulkanBufferObject.h" />
+    <ClInclude Include="Vulkan\VulkanInputAttributeCollection.h" />
     <ClInclude Include="wglew.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

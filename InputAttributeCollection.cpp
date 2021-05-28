@@ -1,5 +1,4 @@
-#include "InputAttribute.h"
-#include "utils.h"
+#include "InputAttributeCollection.h"
 namespace Alice {
 #if ALICE_OGL_RENDERER
 	InputStream::InputStream(GLenum bufferobject_type, GLenum usage) {
@@ -56,4 +55,26 @@ namespace Alice {
 		OGL_CALL(glBindVertexArray(0));
 	}
 #endif
+	void InputAttributeCollection::SetVertexBuffer(int index, VertexBuffer* vertexBuffer) {
+		mVertexBuffers[index] = vertexBuffer;
+		if (mInputVertexBufferCount-1<index){
+			mInputVertexBufferCount = index + 1;
+		}
+	}
+	void InputAttributeCollection::AppendAttributeInput(int input_stream_buffer_index, int location, int component_count, BasicDataType data_type, bool auto_normalize, int stride, int offset) {
+		mAttributeDefines[mInputAttributeCount].mInputStreamBufferIndex = input_stream_buffer_index;
+		mAttributeDefines[mInputAttributeCount].mLocation = location;
+		mAttributeDefines[mInputAttributeCount].mComponentCount = component_count;
+		mAttributeDefines[mInputAttributeCount].mDataType = data_type;
+		mAttributeDefines[mInputAttributeCount].mbAutoNormalization = auto_normalize;
+		mAttributeDefines[mInputAttributeCount].mStride = stride;
+		mAttributeDefines[mInputAttributeCount++].mStartOffset = offset;
+		auto iter = mAttributeBindingDescription.find(input_stream_buffer_index);
+		if (iter == mAttributeBindingDescription.end()) {
+			AttributeBindingDescription abd;
+			abd.mBindingPoint = input_stream_buffer_index;
+			abd.mStride = stride;
+			mAttributeBindingDescription.insert(std::pair<int, AttributeBindingDescription>(input_stream_buffer_index, abd));
+		}
+	}
 }

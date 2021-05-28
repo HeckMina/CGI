@@ -2,43 +2,26 @@
 #include "ggl.h"
 #include "CGI.h"
 namespace Alice {
-	enum class BufferObjectType {
-		kBufferObjectTypeVertexBuffer,
-		kBufferObjectTypeIndexBuffer,
-		kBufferObjectTypeUniformBuffer,
-		kBufferObjectTypeCount
-	};
-	enum class BufferUsageHint{
-		kBufferUsageHintStatic,
-		kBufferUsageHintDynamic,
-		kBufferUsageHintCount
-	};
 	class BufferObject {
 	public:
-		ALICE_GPU_BUFFER mBuffer;
-		ALICE_GPU_MEMORY mMemory;
 		BufferObjectType mBufferObjectType;
 		BufferUsageHint mUsage;
 		void* mDataBuffer;
 		int mBufferSize;
 		bool mbNeedSyncToGPU;
 		BufferObject(BufferObjectType bufferobject_type, BufferUsageHint usage,int size):
-			mBuffer(0),mMemory(0), mDataBuffer(nullptr), mBufferSize(size),mBufferObjectType(bufferobject_type),mUsage(usage), mbNeedSyncToGPU(true){
+			mDataBuffer(nullptr), mBufferSize(size),mBufferObjectType(bufferobject_type),mUsage(usage), mbNeedSyncToGPU(true){
 
 		}
 		virtual ~BufferObject() {
-			if (mBuffer != 0) {
-				ALICE_DELETE_GPU_BUFFER(mBuffer);
-				ALICE_FREE_GPU_MEMORY(mMemory);
-			}
 			if (mDataBuffer!=nullptr){
 				delete[] mDataBuffer;
 			}
 		}
-		virtual int GetBufferSize() { return mBufferSize; }
-		void InitBuffer();
+		int GetBufferSize() { return mBufferSize; }
 		void SetDataBlock(int internal_offset, void* data, int size);
-		void SyncDataFromCPUToGPU();
+		virtual void InitBuffer() {}
+		virtual void SyncDataFromCPUToGPU() {}
 	};
 	class VertexBufferObject :public BufferObject {
 	public:
@@ -61,6 +44,26 @@ namespace Alice {
 		void SetUInt32(int element_index, unsigned int index);
 		void SetUInt16Data(int start_element_index, unsigned short * indices, int element_count);
 		void SetUInt32Data(int start_element_index, unsigned int* indices, int element_count);
-		void Bind();
+		virtual void Bind(){}
+	};
+	class UniformBufferObject : public BufferObject {
+	public:
+		VkBuffer mBuffer;
+		int mBindingPoint;
+		int mUniformDescriptorSetIndex;
+		UniformBufferObject(int size = 16384) :
+			BufferObject(BufferObjectType::kBufferObjectTypeUniformBuffer, BufferUsageHint::kBufferUsageHintDynamic, size),
+			mBindingPoint(-1),
+			mUniformDescriptorSetIndex(-1) {
+			mDataBuffer = new unsigned char[size];
+		}
+		void SetFloat(int offset_in_bytes, const float value);
+		void SetFloat2(int offset_in_bytes, const float* value);
+		void SetFloat2(int offset_in_bytes, const float x, const float y);
+		void SetFloat3(int offset_in_bytes, const float* value);
+		void SetFloat3(int offset_in_bytes, const float x, const float y, const float z);
+		void SetFloat4(int offset_in_bytes, const float* value);
+		void SetFloat4(int offset_in_bytes, const float x, const float y, const float z, const float w);
+		void SetMat4(int offset_in_bytes, const float* value);
 	};
 }

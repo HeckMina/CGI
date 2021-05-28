@@ -1,7 +1,50 @@
-#include "BufferObject.h"
-#include "VulkanUtils.h"
-#include "OpenGLUtils.h"
+#include "VulkanBufferObject.h"
 namespace Alice {
+	void VulkanVertexBufferObject::InitBuffer() {
+		int bufferSize = GetBufferSize();
+		ALICE_GEN_VERTEX_BUFFER(mBuffer, mMemory, bufferSize, mUsage);
+	}
+	void VulkanVertexBufferObject::SyncDataFromCPUToGPU() {
+		if (!mbNeedSyncToGPU) {
+			return;
+		}
+		if (mBuffer == 0) {
+			InitBuffer();
+		}
+		ALICE_BUFFER_SUB_VERTEX_BUFFER(mBuffer, mDataBuffer, GetBufferSize());
+		mbNeedSyncToGPU = false;
+	}
+	void VulkanIndexBufferObject::InitBuffer() {
+		int bufferSize = GetBufferSize();
+		ALICE_GEN_INDEX_BUFFER(mBuffer, mMemory, bufferSize, mUsage);
+	}
+	void VulkanIndexBufferObject::SyncDataFromCPUToGPU() {
+		if (!mbNeedSyncToGPU) {
+			return;
+		}
+		if (mBuffer == 0) {
+			InitBuffer();
+		}
+		ALICE_BUFFER_SUB_INDEX_BUFFER(mBuffer, mDataBuffer, GetBufferSize());
+		mbNeedSyncToGPU = false;
+	}
+	void VulkanIndexBufferObject::Bind() {
+		ALICE_BIND_INDEX_BUFFER(mBuffer, VK_INDEX_TYPE_UINT32);
+	}
+	void VulkanUniformBufferObject::InitBuffer() {
+		int bufferSize = GetBufferSize();
+		ALICE_GEN_UNIFORM_BUFFER(mBuffer, mMemory, bufferSize, mUsage);
+	}
+	void VulkanUniformBufferObject::SyncDataFromCPUToGPU() {
+		if (!mbNeedSyncToGPU) {
+			return;
+		}
+		if (mBuffer == 0) {
+			InitBuffer();
+		}
+		ALICE_BUFFER_SUB_UNIFORM_BUFFER(mMemory, mDataBuffer, GetBufferSize());
+		mbNeedSyncToGPU = false;
+	}
 	/*void BufferObject::InitBuffer() {
 		int bufferSize = GetBufferSize();
 		switch (mBufferObjectType){
@@ -15,13 +58,13 @@ namespace Alice {
 			ALICE_GEN_UNIFORM_BUFFER(mBuffer, mMemory, bufferSize, mUsage);
 			break;
 		}
-	}*/
+	}
 	void BufferObject::SetDataBlock(int internal_offset, void* data, int size) {
 		float* dataPtr = (float*)((char*)mDataBuffer + internal_offset);
 		memcpy(dataPtr, data, size);
 		mbNeedSyncToGPU = true;
 	}
-	/*void BufferObject::SyncDataFromCPUToGPU() {
+	void BufferObject::SyncDataFromCPUToGPU() {
 		if (!mbNeedSyncToGPU){
 			return;
 		}
@@ -40,7 +83,7 @@ namespace Alice {
 			break;
 		}
 		mbNeedSyncToGPU = false;
-	}*/
+	}
 	void VertexBufferObject::SetFloat4Data(int element_index, int internal_offset, float* data) {
 		float* dataPtr = (float*)((char*)mDataBuffer+mStride*element_index+internal_offset);
 		dataPtr[0] = data[0];
@@ -49,7 +92,7 @@ namespace Alice {
 		dataPtr[3] = data[3];
 		mbNeedSyncToGPU = true;
 	}
-	void VertexBufferObject::SetFloat4Data(int element_index, int internal_offset, float x, float y/* =0.0f */, float z/* =0.0f */, float w/* =1.0f */) {
+	void VertexBufferObject::SetFloat4Data(int element_index, int internal_offset, float x, float y, float z, float w) {
 		float* dataPtr = (float*)((char*)mDataBuffer + mStride * element_index + internal_offset);
 		dataPtr[0] = x;
 		dataPtr[1] = y;
@@ -77,50 +120,7 @@ namespace Alice {
 		memcpy(dataPtr, indices, sizeof(unsigned int) * element_count);
 		mbNeedSyncToGPU = true;
 	}
-	void UniformBufferObject::SetFloat(int offset_in_bytes, const float value) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		*dataPtr = value;
-		mbNeedSyncToGPU = true;
-	}
-	void UniformBufferObject::SetFloat2(int offset_in_bytes, const float x, const float y) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		*dataPtr = x;
-		*(dataPtr + 1) = y;
-		mbNeedSyncToGPU = true;
-	}
-	void UniformBufferObject::SetFloat2(int offset_in_bytes, const float* value) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		memcpy(dataPtr, value, sizeof(float) * 2);
-		mbNeedSyncToGPU = true;
-	}
-	void UniformBufferObject::SetFloat3(int offset_in_bytes, const float x, const float y, const float z) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		*dataPtr = x;
-		*(dataPtr + 1) = y;
-		*(dataPtr + 2) = z;
-		mbNeedSyncToGPU = true;
-	}
-	void UniformBufferObject::SetFloat3(int offset_in_bytes, const float* value) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		memcpy(dataPtr, value, sizeof(float) * 3);
-		mbNeedSyncToGPU = true;
-	}
-	void UniformBufferObject::SetFloat4(int offset_in_bytes, const float x, const float y, const float z, const float w) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		*dataPtr = x;
-		*(dataPtr + 1) = y;
-		*(dataPtr + 2) = z;
-		*(dataPtr + 3) = w;
-		mbNeedSyncToGPU = true;
-	}
-	void UniformBufferObject::SetFloat4(int offset_in_bytes, const float* value) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		memcpy(dataPtr, value, sizeof(float) * 4);
-		mbNeedSyncToGPU = true;
-	}
-	void UniformBufferObject::SetMat4(int offset_in_bytes, const float* value) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		memcpy(dataPtr, value, sizeof(float) * 16);
-		mbNeedSyncToGPU = true;
-	}
+	void IndexBufferObject::Bind() {
+
+	}*/
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "InputAttribute.h"
+#include "InputAttributeCollection.h"
 #include "InputUniform.h"
 #include "ShaderPipeline.h"
 #include "ViewportSetting.h"
@@ -26,6 +26,6 @@ namespace Alice {
 		ALICE_GRAPHIC_PIPELINE mGraphicPipeline;
 		VkPipelineLayout mPipelineLayout;
 		GraphicPipelineSetting mGraphicPipelineSetting;
-		void Compile(const InputAttributeDescription *inputAttributesDescription, const ShaderPipeline*shaderPipeline,const VkDescriptorSetLayout &layout);
+		void Compile(const InputAttributeCollection*inputAttributesDescription, const ShaderPipeline*shaderPipeline,const VkDescriptorSetLayout &layout);
 	};
 }

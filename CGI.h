@@ -1,58 +1,71 @@
 #pragma once
 #include "utils.h"
-enum ColorBufferMask {
-	kColorBufferMaskR,
-	kColorBufferMaskG,
-	kColorBufferMaskB,
-	kColorBufferMaskA,
-	kColorBufferMaskCount
-};
-enum BlendOperation {
-	kBlendOperationAdd = 0,
-	kBlendOperationSubstract = 1,
-	kBlendOperationReverseSubstract = 2,
-	kBlendOperationMin = 3,
-	kBlendOperationMax = 4
-};
-enum BlendFactor {
-	kBlendFactorZero,
-	kBlendFactorOne,
-	kBlendFactorSrcColor,
-	kBlendFactorOneMinusSrcColor,
-	kBlendFactorDstColor,
-	kBlendFactorOneMinusDstColor,
-	kBlendFactorSrcAlpha,
-	kBlendFactorOneMinusSrcAlpha,
-	kBlendFactorDstAlpha,
-	kBlendFactorOneMinusDstAlpha,
-	kBlendFactorConstantColor,
-	kBlendFactorOneMinusConstantColor,
-	kBlendFactorConstantAlpha,
-	kBlendFactorOneMinusConstantAlpha,
-	kBlendFactorSrcAlphaSaturate,
-	kBlendFactorSrc1Color,
-	kBlendFactorOneMinusSrc1Color,
-	kBlendFactorSrc1Alpha,
-	kBlendFactorOneMinusSrc1Alpha
+namespace Alice {
+	enum ColorBufferMask {
+		kColorBufferMaskR,
+		kColorBufferMaskG,
+		kColorBufferMaskB,
+		kColorBufferMaskA,
+		kColorBufferMaskCount
 	};
-enum LogicOperation {
-	kLogicOperationClear,
-	kLogicOperationAnd,
-	kLogicOperationAndReverse,
-	kLogicOperationCopy,
-	kLogicOperationAndInverted,
-	kLogicOperationNoOperation,
-	kLogicOperationXor,
-	kLogicOperationOr,
-	kLogicOperationNor,
-	kLogicOperationEquivalent,
-	kLogicOperationInvert,
-	kLogicOperationOrReverse,
-	kLogicOperationCopyInverted,
-	kLogicOperationOrInverted,
-	kLogicOperationNand,
-	kLogicOperationSet
-};
+	enum BlendOperation {
+		kBlendOperationAdd = 0,
+		kBlendOperationSubstract = 1,
+		kBlendOperationReverseSubstract = 2,
+		kBlendOperationMin = 3,
+		kBlendOperationMax = 4
+	};
+	enum BlendFactor {
+		kBlendFactorZero,
+		kBlendFactorOne,
+		kBlendFactorSrcColor,
+		kBlendFactorOneMinusSrcColor,
+		kBlendFactorDstColor,
+		kBlendFactorOneMinusDstColor,
+		kBlendFactorSrcAlpha,
+		kBlendFactorOneMinusSrcAlpha,
+		kBlendFactorDstAlpha,
+		kBlendFactorOneMinusDstAlpha,
+		kBlendFactorConstantColor,
+		kBlendFactorOneMinusConstantColor,
+		kBlendFactorConstantAlpha,
+		kBlendFactorOneMinusConstantAlpha,
+		kBlendFactorSrcAlphaSaturate,
+		kBlendFactorSrc1Color,
+		kBlendFactorOneMinusSrc1Color,
+		kBlendFactorSrc1Alpha,
+		kBlendFactorOneMinusSrc1Alpha
+	};
+	enum LogicOperation {
+		kLogicOperationClear,
+		kLogicOperationAnd,
+		kLogicOperationAndReverse,
+		kLogicOperationCopy,
+		kLogicOperationAndInverted,
+		kLogicOperationNoOperation,
+		kLogicOperationXor,
+		kLogicOperationOr,
+		kLogicOperationNor,
+		kLogicOperationEquivalent,
+		kLogicOperationInvert,
+		kLogicOperationOrReverse,
+		kLogicOperationCopyInverted,
+		kLogicOperationOrInverted,
+		kLogicOperationNand,
+		kLogicOperationSet
+	};
+	enum class BufferObjectType {
+		kBufferObjectTypeVertexBuffer,
+		kBufferObjectTypeIndexBuffer,
+		kBufferObjectTypeUniformBuffer,
+		kBufferObjectTypeCount
+	};
+	enum class BufferUsageHint {
+		kBufferUsageHintStatic,
+		kBufferUsageHintDynamic,
+		kBufferUsageHintCount
+	};
+}
 #ifdef ALICE_OGL_RENDERER
 #include "ggl.h"
 #define ALICE_GPU_BUFFER GLuint

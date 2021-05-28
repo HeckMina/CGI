@@ -9,7 +9,6 @@
 #include "framebufferobject.h"
 #include "fullscreenquad.h"
 #include "TextureCubeMap.h"
-#include "InputAttribute.h"
 #include "InputUniform.h"
 #include <thread>
 using namespace Alice;

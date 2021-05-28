@@ -1,51 +1,5 @@
 #include "InputUniform.h"
 namespace Alice {
-	void UniformBufferObject::SetFloat(int offset_in_bytes, const float value) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		*dataPtr = value;
-		mbNeedSyncToGPU = true;
-	}
-	void UniformBufferObject::SetFloat2(int offset_in_bytes, const float x, const float y) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		*dataPtr = x;
-		*(dataPtr + 1) = y;
-		mbNeedSyncToGPU = true;
-	}
-	void UniformBufferObject::SetFloat2(int offset_in_bytes, const float* value) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		memcpy(dataPtr, value, sizeof(float) * 2);
-		mbNeedSyncToGPU = true;
-	}
-	void UniformBufferObject::SetFloat3(int offset_in_bytes, const float x, const float y, const float z) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		*dataPtr = x;
-		*(dataPtr + 1) = y;
-		*(dataPtr + 2) = z;
-		mbNeedSyncToGPU = true;
-	}
-	void UniformBufferObject::SetFloat3(int offset_in_bytes, const float* value) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		memcpy(dataPtr, value, sizeof(float) * 3);
-		mbNeedSyncToGPU = true;
-	}
-	void UniformBufferObject::SetFloat4(int offset_in_bytes, const float x, const float y, const float z, const float w) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		*dataPtr = x;
-		*(dataPtr + 1) = y;
-		*(dataPtr + 2) = z;
-		*(dataPtr + 3) = w;
-		mbNeedSyncToGPU = true;
-	}
-	void UniformBufferObject::SetFloat4(int offset_in_bytes, const float* value) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		memcpy(dataPtr, value, sizeof(float) * 4);
-		mbNeedSyncToGPU = true;
-	}
-	void UniformBufferObject::SetMat4(int offset_in_bytes, const float* value) {
-		float* dataPtr = (float*)((char*)mDataBuffer + offset_in_bytes);
-		memcpy(dataPtr, value, sizeof(float) * 16);
-		mbNeedSyncToGPU = true;
-	}
 	UniformInputDescription::UniformInputDescription() {
 		mbNeedUpdate = false;
 	}

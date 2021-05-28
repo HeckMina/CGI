@@ -2,10 +2,10 @@
 #include "VulkanUtils.h"
 
 namespace Alice {
-	std::vector<VkVertexInputAttributeDescription> GenVertexInputAttributeDescription(const InputAttributeDescription* inputAttributesDescription) {
+	std::vector<VkVertexInputAttributeDescription> GenVertexInputAttributeDescription(const InputAttributeCollection* inputAttributesDescription) {
 		std::vector<VkVertexInputAttributeDescription> attribute_descriptions;
-		attribute_descriptions.resize(inputAttributesDescription->mCurrentInputAttributeCount);
-		for (int i = 0; i < inputAttributesDescription->mCurrentInputAttributeCount; ++i) {
+		attribute_descriptions.resize(inputAttributesDescription->mInputAttributeCount);
+		for (int i = 0; i < inputAttributesDescription->mInputAttributeCount; ++i) {
 			attribute_descriptions[i].binding = inputAttributesDescription->mAttributeDefines[i].mInputStreamBufferIndex;
 			attribute_descriptions[i].location = inputAttributesDescription->mAttributeDefines[i].mLocation;
 			VkFormat format = VK_FORMAT_R32G32B32A32_SFLOAT;
@@ -19,7 +19,7 @@ namespace Alice {
 		}
 		return attribute_descriptions;
 	}
-	std::vector<VkVertexInputBindingDescription> GenVertexInputBindingDescription(const InputAttributeDescription* inputAttributesDescription) {
+	std::vector<VkVertexInputBindingDescription> GenVertexInputBindingDescription(const InputAttributeCollection* inputAttributesDescription) {
 		int attributeBindingDescriptionCount = inputAttributesDescription->mAttributeBindingDescription.size();
 		std::vector<VkVertexInputBindingDescription> attribute_binding_descriptions;
 		attribute_binding_descriptions.resize(attributeBindingDescriptionCount);
@@ -73,7 +73,7 @@ namespace Alice {
 		return ALICE_CREATE_GRAPHIC_PIPELINE_LAYOUT(pipeline_layout_create_info);
 	}
 	void GraphicPipeline::Compile(
-		const InputAttributeDescription* inputAttributesDescription, 
+		const InputAttributeCollection* inputAttributesDescription,
 		const ShaderPipeline* shaderPipeline, 
 		const VkDescriptorSetLayout& descriptorSetLayout) {
 #if ALICE_VULKAN_RENDERER

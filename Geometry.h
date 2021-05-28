@@ -1,17 +1,19 @@
 #pragma once
-#include "ggl.h"
-#include "InputAttribute.h"
-#include "BufferObject.h"
+#include "InputAttributeCollection.h"
+#include "IndexBuffer.h"
 namespace Alice {
+	class Submesh {
+	public:
+		IndexBuffer *mIndexBuffer;
+		int mValidIndexCount;
+		Submesh() :mIndexBuffer(nullptr),mValidIndexCount(0){}
+	};
 	class Geometry {
 	public:
-		InputAttributeDescription mInputAttributeDescription;
-		VertexBufferObject *mVBO;
-		IndexBufferObject *mIBO;
-		int mVertexCount;
-		int mIndexCount;
-		bool mbDrawWidthIBO;
+		InputAttributeCollection *mInputAttributeCollection;
+		VertexBuffer *mVertexBuffer;
 		PrimitiveType mPrimitiveType;
+		std::vector<Submesh*> mSubmeshes;
 		Geometry();
 		virtual void Init() {}
 		void SetVertexCount(int vertex_count);
